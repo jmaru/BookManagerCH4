@@ -1,0 +1,45 @@
+//
+//  DetailView.swift
+//  BookManagerCH4
+//
+//  Created by Jorge Gabriel Marin Urias on 11/22/25.
+//
+
+// When you select an item from the list, this view gives more detail about the view itself
+
+import SwiftUI
+
+struct DetailView: View {
+    
+    @Binding var book: Book
+    @State var showEditBookSheet: Bool = false
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack {
+                    Image(book.coverImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 150)
+                        .padding(.vertical,20)
+                    VStack {
+                        Text(book.title)
+                            .font(.largeTitle)
+                        Text("by \(book.author == "" ? "Unknown" : book.author)") //ternary operator
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                Text(book.details)
+                    .padding(.horizontal, 20)
+            }
+        }
+        .navigationBarItems(trailing: Button("Edit"){
+            showEditBookSheet.toggle()
+        })
+        .sheet(isPresented: $showEditBookSheet) {
+            AddEditView(bookToEdit: $book)
+        }
+    }
+}
