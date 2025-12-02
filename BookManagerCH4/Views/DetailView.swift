@@ -31,9 +31,24 @@ struct DetailView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                HStack{
+                    if (book.genre != .unknown){
+                        CustomCapsule(text: book.genre.rawValue)
+                    }
+                    if (book.status != .unknown){
+                        CustomCapsule(text: book.status.rawValue, color: .secondary)
+                    }
+                }
                 Text(book.details)
                     .padding(.horizontal, 20)
+                if(book.rating == 0){
+                    Text("No rating yet")
+                } else{
+                    Text("Rating: \(book.rating)\(book.rating==1 ? " star" : " stars")")
+                }
+                Text(book.review)
             }
+            .padding()
         }
         .navigationBarItems(trailing: Button("Edit"){
             showEditBookSheet.toggle()
