@@ -18,7 +18,7 @@ struct FavoriteToggle: View {
     
     public var body: some View {
         ZStack {
-            Image(systemName: "hear.fill")
+            Image(systemName: "heart.fill")
                 .foregroundColor(.red)
                 .font(.largeTitle)
                 .opacity(opacity)
