@@ -12,6 +12,7 @@ func getBooks() -> [Book] {
             author: "J.R.R. Tolkien",
             coverImage: "lotr_fellowship",
             details: "Fellowship of the Ring is the first book in J.R.R Tolkien's high-fantasy trilogy"
+            // isFavorite is not needed to be explicit, because it has a default value,
         ),
         Book(
             title: "The Two Towers",
@@ -23,7 +24,8 @@ func getBooks() -> [Book] {
             title: "The Return of the King",
             author: "J.R.R.Tolkien",
             coverImage: "lotr_king",
-            details: "The Return of the King is the third book in J.R.R Tolkien's high-fantasy trilogy"
+            details: "The Return of the King is the third book in J.R.R Tolkien's high-fantasy trilogy",
+            isFavorite: true // we can change the default value
         ),
     ]
 }

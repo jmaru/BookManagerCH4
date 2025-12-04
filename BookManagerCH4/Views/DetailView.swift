@@ -38,6 +38,8 @@ struct DetailView: View {
                     if (book.status != .unknown){
                         CustomCapsule(text: book.status.rawValue, color: .secondary)
                     }
+                    Spacer()
+                    FavoriteToggle(isFavorite: $book.isFavorite)
                 }
                 Text(book.details)
                     .padding(.horizontal, 20)
