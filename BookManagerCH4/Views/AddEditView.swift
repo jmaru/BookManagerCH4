@@ -26,10 +26,41 @@ struct AddEditView: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Title", text: $workingBook.title)
-                TextField("Author", text: $workingBook.author)
-                TextEditor(text: $workingBook.details)
-                    .frame(minHeight: 150)
+                //Section creates a "white globe" around all input field
+                //used divide fields
+                Section(header: Text("Book details")) {
+                    // a plain text field
+                    TextField("Title of the book", text: $workingBook.title)
+                    TextField("Author", text: $workingBook.author)
+                    //Picker is like a dropdown
+                    Picker("Genre", selection: $workingBook.genre){
+                        ForEach(Genre.allCases, id: \.self) { genre in
+                            //Text is the displayed text and the .tag is a modifier with the actual value saved
+                            Text(genre.rawValue).tag(genre)
+                        }
+                    }
+                    //This is like a textarea
+                    TextEditor(text: $workingBook.details)
+                        .frame(height: 150)
+                }
+                Section(header: Text("My review")) {
+                    Picker("Rating", selection: $workingBook.rating){
+                        //special base case
+                        Text("No rating").tag(0)
+                        //case from 1 to 5
+                        ForEach(1...5, id: \.self) { rating in
+                            Text("\(rating)").tag(rating)
+                        }
+                    }
+                    Picker("Reading status", selection: $workingBook.status){
+                        //Enums have a special property allCasses
+                        ForEach(ReadingStatus.allCases, id: \.self) { status in
+                            Text(status.rawValue).tag(status)
+                        }
+                    }
+                    TextEditor(text: $workingBook.review)
+                        .frame(height: 150)
+                }
             }
             .navigationBarTitle(titleText)
             .toolbar{
@@ -38,6 +69,11 @@ struct AddEditView: View {
                         dismiss()
                         self.$bookToEdit.wrappedValue = self.workingBook
                     }.disabled(workingBook.title.isEmpty)
+                }
+                ToolbarItem(placement: .cancellationAction){
+                    Button("Cancel"){
+                        dismiss()
+                    }
                 }
             }
         }

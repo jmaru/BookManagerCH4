@@ -13,4 +13,9 @@ struct Book: Identifiable {
     var author: String
     var coverImage: String = "default_book"
     var details: String
+    
+    var rating: Int = 0
+    var review: String = ""
+    var status: ReadingStatus = .unknown
+    var genre: Genre = .unknown
 }
